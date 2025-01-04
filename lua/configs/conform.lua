@@ -1,4 +1,8 @@
-local options = {
+local conform = require("conform")
+
+conform.setup({
+    log_level = vim.log.levels.DEBUG,
+
     formatters_by_ft = {
         lua = { "stylua" },
         c = { "clang-format" },
@@ -49,10 +53,8 @@ local options = {
     },
 
     format_on_save = {
-        -- These options will be passed to conform.format()
-        timeout_ms = 500,
+        timeout_ms = 1000,
+        async = false,
         lsp_fallback = true,
     },
-}
-
-return options
+})
