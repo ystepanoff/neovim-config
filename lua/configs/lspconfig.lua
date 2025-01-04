@@ -4,11 +4,10 @@ local on_attach = require("nvchad.configs.lspconfig").on_attach
 local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
 
-local lspconfig = require "lspconfig"
+local lspconfig = require("lspconfig")
 
 -- Default servers
 local default_servers = {
-    "html",
     "cssls",
     "pyright",
 }
@@ -26,9 +25,10 @@ lspconfig.servers = {
     "gopls",
     "pyright",
     "hls",
+    "html",
 }
 
-lspconfig.lua_ls.setup {
+lspconfig.lua_ls.setup({
     on_attach = on_attach,
     on_init = on_init,
     capabilities = capabilities,
@@ -52,7 +52,7 @@ lspconfig.lua_ls.setup {
             },
         },
     },
-}
+})
 
 lspconfig.clangd.setup({
     on_attach = function(client, bufnr)
@@ -97,3 +97,15 @@ lspconfig.hls.setup({
     capabilities = capabilities,
 })
 
+lspconfig.html.setup({
+    cmd = { "vscode-html-language-server", "--stdio" },
+    filetypes = { "html" },
+    init_options = {
+        configurationSection = { "html", "css", "javascript" },
+        embeddedLanguages = {
+            css = true,
+            javascript = true,
+        },
+    },
+    settings = {},
+})
