@@ -9,7 +9,7 @@ conform.setup({
         cpp = { "clang-format" },
         css = { "prettier" },
         html = { "prettier" },
-        go = { "gofumpt", "goimports-reviser", "golines" },
+        go = { "gofumpt", "golines" },
         python = { "isort", "black" },
         haskell = { "fourmolu", "stylish-haskell" },
     },
@@ -48,6 +48,18 @@ conform.setup({
             prepend_args = {
                 "--profile",
                 "black",
+            },
+        },
+
+        -- HTML/CSS
+        prettier = {
+            prepend_args = {
+                "--print-width",
+                "120",
+                "--prose-wrap",
+                "preserve",
+                "--html-whitespace-sensitivity",
+                "strict",
             },
         },
     },
